@@ -1,7 +1,16 @@
 import type { Plugin } from "unified";
 import type { Root, Element } from "hast";
 
-const rehypeGlightboxImages: Plugin<[], Root> = () => {
+export interface RehypeGlightboxOptions {
+  lightbox?: boolean;
+  figcaption?: boolean;
+  gallery?: string;
+}
+
+const rehypeGlightboxImages: Plugin<[RehypeGlightboxOptions?], Root> = (opts = {}) => {
+  const lightbox = opts.lightbox ?? true;
+  const figcaptionEnabled = opts.figcaption ?? true;
+  const gallery = opts.gallery ?? "markdown";
   return (tree: Root) => {
     const isElement = (n: unknown, name?: string): n is Element =>
       !!n && (n as any).type === "element" && (!name || (n as any).tagName === name);
@@ -10,18 +19,52 @@ const rehypeGlightboxImages: Plugin<[], Root> = () => {
       const src = String((node.properties as any)?.src || "");
       if (!src) return;
       const alt = String((node.properties as any)?.alt || "");
-      const a: Element = {
-        type: "element",
-        tagName: "a",
-        properties: {
-          href: src,
-          className: ["glightbox"],
-          "data-gallery": "markdown",
-          ...(alt ? { "data-title": alt } : {})
-        },
-        children: [node]
-      };
-      (parent.children as any[])[index] = a;
+      let replacement: Element | null = null;
+      if (lightbox) {
+        const a: Element = {
+          type: "element",
+          tagName: "a",
+          properties: {
+            href: src,
+            className: ["glightbox"],
+            "data-gallery": gallery,
+            ...(alt ? { "data-title": alt } : {})
+          },
+          children: [node]
+        };
+        if (figcaptionEnabled) {
+          const figcaption: Element = {
+            type: "element",
+            tagName: "figcaption",
+            properties: { className: ["aps-figcaption"] },
+            children: alt ? [{ type: "text", value: alt }] : []
+          };
+          const figure: Element = {
+            type: "element",
+            tagName: "figure",
+            properties: { className: ["aps-figure"] },
+            children: [a, figcaption]
+          };
+          replacement = figure;
+        } else {
+          replacement = a;
+        }
+      } else if (figcaptionEnabled) {
+        const figcaption: Element = {
+          type: "element",
+          tagName: "figcaption",
+          properties: { className: ["aps-figcaption"] },
+          children: alt ? [{ type: "text", value: alt }] : []
+        };
+        const figure: Element = {
+          type: "element",
+          tagName: "figure",
+          properties: { className: ["aps-figure"] },
+          children: [node, figcaption]
+        };
+        replacement = figure;
+      }
+      if (replacement) (parent.children as any[])[index] = replacement;
     };
     const walk = (node: any, parent: any = null) => {
       if (!node) return;
