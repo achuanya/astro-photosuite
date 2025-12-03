@@ -1,0 +1,28 @@
+/* ===== GLightbox overrides ===== */
+.glightbox-clean .gdesc-inner {
+  padding: 0 !important;
+}
+.glightbox-clean .gslide-title {
+  margin-bottom: 0 !important;
+  padding: 5px 12px !important;
+  font-size: 12px !important;
+}
+
+/* 控制底部描述容器高度 */
+.gdesc-inner {
+  padding: 5px 5px !important;
+  margin-left: 10px;
+}
+
+.gslide-image img {
+  max-height: calc(100vh - 60px) !important;
+}
+
+html.glightbox-open,
+body.glightbox-open {
+  overflow: auto !important;
+}
+
+.gslide-desc {
+  color: #23272e;
+}
