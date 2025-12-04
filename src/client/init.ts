@@ -2,11 +2,10 @@ export interface InitOptions {
   selector: string;
   gallery: string;
   lightbox: boolean;
-  figcaption: boolean;
 }
 
 export default function buildInitClient(opts: InitOptions): string {
-  const { selector, gallery, lightbox, figcaption } = opts;
+  const { selector, gallery, lightbox } = opts;
   return `
     (function(){
       var lightbox = ${JSON.stringify(lightbox)};

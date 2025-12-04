@@ -2,6 +2,8 @@ export interface PhotosuiteOptions {
   selector?: string;
   gallery?: string;
   lightbox?: boolean;
-  imgDescriptions?: boolean;
-  figcaption?: boolean;
+  imageAlts?: boolean;
+  imageBase?: string;
+  imageDir?: string;
+  fileDir?: boolean;
 }

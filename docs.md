@@ -14,7 +14,7 @@ The integration consists of four main parts:
 
 ## 1. Rehype Plugin
 
-**File:** `src/plugins/rehype-glightbox-images.ts`
+**File:** `src/rehype-glightbox-images.ts`
 
 This plugin traverses the HTML Abstract Syntax Tree (HAST) generated from Markdown. It finds `<img>` elements that are not already inside links and wraps them in an anchor tag with `class="glightbox"` and `data-gallery="markdown"`. It also forwards the image's `alt` text to the `data-title` attribute for the lightbox caption.
 
@@ -96,7 +96,7 @@ We import the custom plugin and add it to the `rehypePlugins` array in the `mark
 import { defineConfig } from "astro/config";
 // ... other imports
 // Rehype plugin to wrap Markdown images with GLightbox-ready anchors
-import rehypeGlightboxImages from "./src/plugins/rehype-glightbox-images";
+import rehypeGlightboxImages from "./src/rehype-glightbox-images";
 
 // https://astro.build/config
 export default defineConfig({
