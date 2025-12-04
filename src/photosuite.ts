@@ -1,6 +1,8 @@
 import type { AstroIntegration } from "astro";
-import rehypeGlightboxImages from "./rehype-glightbox-images";
-import buildInitClient from "./client/init";
+import glightboxPlugin from "./plugins/glightbox";
+import imageAltsPlugin from "./plugins/imageAlts";
+import imageUrlPlugin from "./plugins/imageUrl";
+import buildInitClient from "./init";
 import type { PhotosuiteOptions } from "./types";
 
 export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroIntegration {
@@ -20,7 +22,12 @@ export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroI
         const existing = config.markdown?.rehypePlugins ?? [];
         updateConfig({
           markdown: {
-            rehypePlugins: [...existing, [rehypeGlightboxImages, { glightbox, imageAlts, gallery, imageBase, imageDir, fileDir }]]
+            rehypePlugins: [
+              ...existing,
+              [imageUrlPlugin, { imageBase, imageDir, fileDir }],
+              [glightboxPlugin, { glightbox, gallery }],
+              [imageAltsPlugin, { imageAlts }]
+            ]
           }
         });
         injectScript("head-inline", initClient);

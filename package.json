@@ -1,16 +1,16 @@
 {
   "name": "astro-photosuite",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "GLightbox-driven lightbox integration for Astro Markdown images.",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/photosuite.js",
+  "types": "./dist/photosuite.d.ts",
   "files": ["dist", "README.md"],
   "sideEffects": ["dist/*.css"],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/photosuite.d.ts",
+      "default": "./dist/photosuite.js"
     },
     "./dist/glightbox.css": "./dist/glightbox.css",
     "./dist/image-alts.css": "./dist/image-alts.css"
@@ -29,7 +29,6 @@
     "unified": "^11.0.4"
   },
   "scripts": {
-    "build:css": "sass src/styles/glightbox.scss dist/glightbox.css --no-source-map && sass src/styles/image-alts.scss dist/image-alts.css --no-source-map",
-    "build": "npm run build:css && tsup src/index.ts src/rehype-glightbox-images.ts --format esm --dts --out-dir dist"
+    "build": "sass src/styles/glightbox.scss dist/glightbox.css --no-source-map --style=compressed && sass src/styles/image-alts.scss dist/image-alts.css --no-source-map --style=compressed && tsup src/photosuite.ts --format esm --dts --out-dir dist --minify && node scripts/postcompress.mjs"
   }
 }
