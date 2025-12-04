@@ -3,13 +3,14 @@ import type { Root, Element } from "hast";
 
 export interface RehypeGlightboxOptions {
   lightbox?: boolean;
+  imgDescriptions?: boolean;
   figcaption?: boolean;
   gallery?: string;
 }
 
 const rehypeGlightboxImages: Plugin<[RehypeGlightboxOptions?], Root> = (opts = {}) => {
   const lightbox = opts.lightbox ?? true;
-  const figcaptionEnabled = opts.figcaption ?? true;
+  const imgDescriptionsEnabled = (opts as any).imgDescriptions ?? opts.figcaption ?? true;
   const gallery = opts.gallery ?? "markdown";
   return (tree: Root) => {
     const isElement = (n: unknown, name?: string): n is Element =>
@@ -32,7 +33,7 @@ const rehypeGlightboxImages: Plugin<[RehypeGlightboxOptions?], Root> = (opts = {
           },
           children: [node]
         };
-        if (figcaptionEnabled) {
+        if (imgDescriptionsEnabled) {
           const figcaption: Element = {
             type: "element",
             tagName: "figcaption",
@@ -49,7 +50,7 @@ const rehypeGlightboxImages: Plugin<[RehypeGlightboxOptions?], Root> = (opts = {
         } else {
           replacement = a;
         }
-      } else if (figcaptionEnabled) {
+      } else if (imgDescriptionsEnabled) {
         const figcaption: Element = {
           type: "element",
           tagName: "figcaption",

@@ -5,22 +5,23 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "styles.css", "README.md"],
+  "files": ["dist", "README.md"],
+  "sideEffects": ["dist/*.css"],
   "keywords": ["astro-integration", "withastro", "glightbox", "lightbox", "markdown", "images"],
-  "dependencies": {
-    "@types/hast": "^3.0.4",
-    "hast": "^1.0.0",
-    "unified": "^11.0.4"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "astro": "^4.0.0 || ^5.0.0"
   },
   "devDependencies": {
     "astro": "^5.0.0",
+    "sass": "^1.77.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "@types/hast": "^3.0.4",
+    "unified": "^11.0.4"
   },
   "scripts": {
-    "build": "tsup src/index.ts src/rehype-glightbox-images.ts --format esm --dts --out-dir dist"
+    "build:css": "sass src/styles/lightbox.scss dist/styles-lightbox.css --no-source-map && sass src/styles/img-descriptions.scss dist/styles-img-descriptions.css --no-source-map",
+    "build": "npm run build:css && tsup src/index.ts src/rehype-glightbox-images.ts --format esm --dts --out-dir dist"
   }
 }

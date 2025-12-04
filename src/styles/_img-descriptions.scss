@@ -1,0 +1,25 @@
+.aps-figure {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.aps-figure > a {
+  display: block;
+}
+.aps-figure img {
+  display: block;
+}
+.aps-figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #fff;
+  background: linear-gradient(to right, rgba(0,0,0,0.8), transparent);
+}
