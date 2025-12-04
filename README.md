@@ -29,7 +29,7 @@ export default defineConfig({
 
 - `selector`: CSS selector used to initialize GLightbox. Default: `a.glightbox`.
 - `gallery`: Value for `data-gallery` when missing. Default: `markdown`.
-- `lightbox`: Enable/disable GLightbox behavior entirely. Default: `true`.
+- `glightbox`: Enable/disable GLightbox behavior entirely. Default: `true`.
 - `imageAlts`: Enable/disable automatic bottom image descriptions (rendered via `<figcaption>`). Default: `true`.
 - `imageBase`: Base URL for image short links. Default: undefined.
 - `imageDir`: Frontmatter key for per-article directory segment. Default: `imageDir`.
@@ -44,19 +44,19 @@ export default defineConfig({
 
 ### Examples
 
-Disable lightbox but keep descriptions:
+Disable glightbox but keep descriptions:
 
 ```
 export default defineConfig({
-  integrations: [photosuite({ lightbox: false, imageAlts: true })]
+  integrations: [photosuite({ glightbox: false, imageAlts: true })]
 })
 ```
 
-Disable descriptions but keep lightbox:
+Disable descriptions but keep glightbox:
 
 ```
 export default defineConfig({
-  integrations: [photosuite({ lightbox: true, imageAlts: false })]
+  integrations: [photosuite({ glightbox: true, imageAlts: false })]
 })
 ```
 Image short links:

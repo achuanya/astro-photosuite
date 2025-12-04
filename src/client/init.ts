@@ -1,14 +1,14 @@
 export interface InitOptions {
   selector: string;
   gallery: string;
-  lightbox: boolean;
+  glightbox: boolean;
 }
 
 export default function buildInitClient(opts: InitOptions): string {
-  const { selector, gallery, lightbox } = opts;
+  const { selector, gallery, glightbox } = opts;
   return `
     (function(){
-      var lightbox = ${JSON.stringify(lightbox)};
+      var glightbox = ${JSON.stringify(glightbox)};
       var retry = null;
       function ensure(){
         if (window.__glightboxInstance && window.__glightboxInstance.destroy) window.__glightboxInstance.destroy();
@@ -26,7 +26,7 @@ export default function buildInitClient(opts: InitOptions): string {
         }, 50);
       }
       function reinit(){
-        if (lightbox) {
+        if (glightbox) {
           var anchors = document.querySelectorAll('${selector}');
           if (anchors.length) {
             anchors.forEach(function(a){
@@ -43,8 +43,8 @@ export default function buildInitClient(opts: InitOptions): string {
         }
       }
       document.addEventListener('astro:after-swap', reinit);
-      if (document.readyState === 'complete' || document.readyState === 'interactive') { reinit(); if (lightbox) wait(); }
-      else document.addEventListener('DOMContentLoaded', function(){ reinit(); if (lightbox) wait(); });
+      if (document.readyState === 'complete' || document.readyState === 'interactive') { reinit(); if (glightbox) wait(); }
+      else document.addEventListener('DOMContentLoaded', function(){ reinit(); if (glightbox) wait(); });
     })();
   `;
 }

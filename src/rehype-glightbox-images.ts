@@ -2,7 +2,7 @@ import type { Plugin } from "unified";
 import type { Root, Element } from "hast";
 
 export interface RehypeGlightboxOptions {
-  lightbox?: boolean;
+  glightbox?: boolean;
   imageAlts?: boolean;
   gallery?: string;
   imageBase?: string;
@@ -11,7 +11,7 @@ export interface RehypeGlightboxOptions {
 }
 
 const rehypeGlightboxImages: Plugin<[RehypeGlightboxOptions?], Root> = (opts = {}) => {
-  const lightbox = opts.lightbox ?? true;
+  const glightbox = opts.glightbox ?? true;
   const imageAltsEnabled = opts.imageAlts ?? true;
   const gallery = opts.gallery ?? "markdown";
   const base = opts.imageBase;
@@ -44,7 +44,7 @@ const rehypeGlightboxImages: Plugin<[RehypeGlightboxOptions?], Root> = (opts = {
       if (!src) return;
       const altText = String((node.properties as any)?.alt || "").trim();
       let replacement: Element | null = null;
-      if (lightbox) {
+      if (glightbox) {
         const a: Element = {
           type: "element",
           tagName: "a",

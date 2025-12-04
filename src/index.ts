@@ -6,12 +6,12 @@ import type { PhotosuiteOptions } from "./types";
 export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroIntegration {
   const selector = options.selector ?? "a.glightbox";
   const gallery = options.gallery ?? "markdown";
-  const lightbox = options.lightbox ?? true;
+  const glightbox = options.glightbox ?? true;
   const imageAlts = options.imageAlts ?? true;
   const imageBase = options.imageBase;
   const imageDir = options.imageDir ?? "imageDir";
   const fileDir = options.fileDir ?? false;
-  const initClient = buildInitClient({ selector, gallery, lightbox });
+  const initClient = buildInitClient({ selector, gallery, glightbox });
 
   return {
     name: "astro-photosuite",
@@ -20,11 +20,11 @@ export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroI
         const existing = config.markdown?.rehypePlugins ?? [];
         updateConfig({
           markdown: {
-            rehypePlugins: [...existing, [rehypeGlightboxImages, { lightbox, imageAlts, gallery, imageBase, imageDir, fileDir }]]
+            rehypePlugins: [...existing, [rehypeGlightboxImages, { glightbox, imageAlts, gallery, imageBase, imageDir, fileDir }]]
           }
         });
         injectScript("head-inline", initClient);
-        if (lightbox) injectScript("page-ssr", 'import "astro-photosuite/dist/glightbox.css";');
+        if (glightbox) injectScript("page-ssr", 'import "astro-photosuite/dist/glightbox.css";');
         if (imageAlts) injectScript("page-ssr", 'import "astro-photosuite/dist/image-alts.css";');
       }
     }
