@@ -12,7 +12,6 @@
       "types": "./dist/photosuite.d.ts",
       "default": "./dist/photosuite.js"
     },
-    "./dist/glightbox.css": "./dist/glightbox.css",
     "./dist/image-alts.css": "./dist/image-alts.css"
   },
   "keywords": ["astro-integration", "withastro", "glightbox", "lightbox", "markdown", "images"],
@@ -29,6 +28,6 @@
     "unified": "^11.0.4"
   },
   "scripts": {
-    "build": "sass src/styles/glightbox.scss dist/glightbox.css --no-source-map --style=compressed && sass src/styles/image-alts.scss dist/image-alts.css --no-source-map --style=compressed && tsup src/photosuite.ts --format esm --dts --out-dir dist --minify && node scripts/postcompress.mjs"
+    "build": "sass src/styles/image-alts.scss dist/image-alts.css --no-source-map --style=compressed && tsup src/photosuite.ts --format esm --dts --out-dir dist --minify && node scripts/postcompress.mjs"
   }
 }

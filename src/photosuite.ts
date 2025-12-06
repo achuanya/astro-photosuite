@@ -31,7 +31,6 @@ export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroI
           }
         });
         injectScript("head-inline", initClient);
-        if (glightbox) injectScript("page-ssr", 'import "astro-photosuite/dist/glightbox.css";');
         if (imageAlts) injectScript("page-ssr", 'import "astro-photosuite/dist/image-alts.css";');
       }
     }

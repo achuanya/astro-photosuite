@@ -40,7 +40,7 @@ export default defineConfig({
 - Adds a rehype plugin that wraps standalone `<img>` elements in Markdown with `<a class="glightbox" href="...">` when lightbox is enabled.
 - Optionally wraps images with `<figure>` and a bottom `<figcaption>` overlay when `imageAlts` is enabled.
 - Re-initializes GLightbox after Astro view transitions. GLightbox assets (CSS/JS) are no longer auto-loaded by this plugin — include them yourself in your layout.
-- Ships small CSS tweaks that are auto-injected at runtime (lightbox UI adjustments and bottom image descriptions).
+- Ships small CSS for bottom image descriptions that is auto-injected at runtime.
 
 ### Examples
 

@@ -1,0 +1,52 @@
+---
+import MD from './_md.md'
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+
+		<style>
+			:root {
+				color-scheme: dark;
+			}
+			body {
+				background: #282c34;
+				margin: 0;
+			}
+			.container {
+				width: 732px;
+				margin: 0 auto;
+				background: #23272e;
+				padding: 0px 0px;
+				min-height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				box-sizing: border-box;
+				box-shadow: 0 12px 28px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.3);
+			}
+			.content-img {
+				width: 100%;
+				height: auto;
+				display: block;
+			}
+			:global(img) {
+				width: 648px;
+				height: 364.5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container markdown">
+			<MD />
+		</div>
+	</body>
+	<link rel="stylesheet" href="https://cos.lhasa.icu/dist/glightbox/glightbox.min.css" />
+	<script src="https://cos.lhasa.icu/dist/glightbox/glightbox.min.js" async></script>
+</html>
