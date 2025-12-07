@@ -1,5 +1,6 @@
 import type { Plugin } from "unified";
 import type { Root, Element } from "hast";
+import { isElement } from "./hast";
 
 export interface ImageUrlOptions {
   imageBase?: string;
@@ -30,8 +31,6 @@ const imageUrl: Plugin<[ImageUrlOptions?], Root> = (opts = {}) => {
     return i > 0 ? s.slice(0, i) : s;
   };
   return (tree: Root, file?: any) => {
-    const isElement = (n: unknown, name?: string): n is Element =>
-      !!n && (n as any).type === "element" && (!name || (n as any).tagName === name);
     const rewrite = (node: Element) => {
       let src = String((node.properties as any)?.src || "");
       const fm = (file as any)?.data?.astro?.frontmatter || {};
@@ -54,4 +53,3 @@ const imageUrl: Plugin<[ImageUrlOptions?], Root> = (opts = {}) => {
 };
 
 export default imageUrl;
-

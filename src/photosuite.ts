@@ -2,7 +2,7 @@ import type { AstroIntegration } from "astro";
 import glightboxPlugin from "./plugins/glightbox";
 import imageAltsPlugin from "./plugins/imageAlts";
 import imageUrlPlugin from "./plugins/imageUrl";
-import buildInitClient from "./init";
+import { buildGlightboxClient } from "./plugins/glightbox";
 import buildExifClient from "./plugins/exif";
 import type { PhotosuiteOptions } from "./types";
 
@@ -15,7 +15,7 @@ export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroI
   const imageBase = options.imageBase;
   const imageDir = options.imageDir ?? "imageDir";
   const fileDir = options.fileDir ?? false;
-  const initClient = buildInitClient({ selector, gallery, glightbox, glightboxOptions: options.glightboxOptions });
+  const initClient = buildGlightboxClient({ selector, gallery, glightbox, glightboxOptions: options.glightboxOptions });
 
   return {
     name: "astro-photosuite",

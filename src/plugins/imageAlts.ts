@@ -1,5 +1,6 @@
 import type { Plugin } from "unified";
 import type { Root, Element } from "hast";
+import { isElement, isFigure } from "./hast";
 
 export interface ImageAltsOptions {
   imageAlts?: boolean;
@@ -9,9 +10,6 @@ const imageAlts: Plugin<[ImageAltsOptions?], Root> = (opts = {}) => {
   const enabled = opts.imageAlts ?? true;
   return (tree: Root) => {
     if (!enabled) return;
-    const isElement = (n: unknown, name?: string): n is Element =>
-      !!n && (n as any).type === "element" && (!name || (n as any).tagName === name);
-    const isFigure = (n: unknown): n is Element => isElement(n, "figure");
     const getImgAlt = (node: Element): string => {
       if (isElement(node, "img")) return String((node.properties as any)?.alt || "").trim();
       const children = node.children || [];
