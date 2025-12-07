@@ -7,4 +7,5 @@ export interface PhotosuiteOptions {
   imageBase?: string;
   imageDir?: string;
   fileDir?: boolean;
+  glightboxOptions?: Record<string, unknown>;
 }

@@ -30,6 +30,7 @@ export default defineConfig({
 - `selector`: CSS selector used to initialize GLightbox. Default: `a.glightbox`.
 - `gallery`: Value for `data-gallery` when missing. Default: `markdown`.
 - `glightbox`: Enable/disable GLightbox behavior entirely. Default: `true`.
+- `glightboxOptions`: Pass-through options for `GLightbox({...})`. Only `selector` is set by default; all other options are exactly as you provide.
 - `imageAlts`: Enable/disable automatic bottom image descriptions (rendered via `<figcaption>`). Default: `true`.
 - `exif`: Enable/disable top overlay bar (`photosuite-exif`) injection. Default: `true`.
 - `imageBase`: Base URL for image short links. Default: undefined.
@@ -92,3 +93,28 @@ export default defineConfig({
 })
 ```
 If the post file is `2025-11-25-introducing-astro-lhasa-1-0.md`, short links will render from `https://cos.lhasa.icu/dist/images/2025-11-25-introducing-astro-lhasa-1-0/<image-name>`.
+
+### Customize GLightbox via `glightboxOptions`
+
+You can configure any GLightbox option exposed by the library. We do not force default behaviors except `selector`. If you provide `selector` inside `glightboxOptions`, it overrides `selector`.
+
+```
+// astro.config.*
+export default defineConfig({
+  integrations: [photosuite({
+    selector: 'a.glightbox',
+    glightbox: true,
+    glightboxOptions: {
+      loop: false,
+      touchNavigation: false,
+      openEffect: 'zoom',
+      closeEffect: 'fade',
+      slideEffect: 'fade',
+      moreText: '更多',
+      selector: '.gallery a.glightbox'
+    }
+  })]
+})
+```
+
+Note: only JSON-serializable options are supported inlined. Callback functions should be set directly in page scripts if needed.

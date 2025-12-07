@@ -15,7 +15,7 @@ export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroI
   const imageBase = options.imageBase;
   const imageDir = options.imageDir ?? "imageDir";
   const fileDir = options.fileDir ?? false;
-  const initClient = buildInitClient({ selector, gallery, glightbox });
+  const initClient = buildInitClient({ selector, gallery, glightbox, glightboxOptions: options.glightboxOptions });
 
   return {
     name: "astro-photosuite",

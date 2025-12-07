@@ -4,7 +4,13 @@ import photosuite from 'astro-photosuite';
 
 export default defineConfig({
   integrations: [
-    photosuite()
+    photosuite({
+      glightbox: true,
+      glightboxOptions: {
+        zoomable: true,
+        descPosition: 'left',
+      }
+    })
   ],
   server: {
     port: 4444

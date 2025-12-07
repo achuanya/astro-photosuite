@@ -2,18 +2,24 @@ export interface InitOptions {
   selector: string;
   gallery: string;
   glightbox: boolean;
+  glightboxOptions?: Record<string, unknown>;
 }
 
 export default function buildInitClient(opts: InitOptions): string {
-  const { selector, gallery, glightbox } = opts;
+  const { selector, gallery, glightbox, glightboxOptions = {} } = opts;
+  const userOptsJson = JSON.stringify(glightboxOptions ?? {});
   return `
     (function(){
       var glightbox = ${JSON.stringify(glightbox)};
       var retry = null;
+      var userOpts = ${userOptsJson};
+      var selector = '${selector}';
+      if (userOpts && typeof userOpts.selector === 'string' && userOpts.selector.trim()) selector = userOpts.selector;
       function ensure(){
         if (window.__glightboxInstance && window.__glightboxInstance.destroy) window.__glightboxInstance.destroy();
         if (typeof window.GLightbox === 'function') {
-          window.__glightboxInstance = window.GLightbox({ selector: '${selector}', touchNavigation: true, loop: true, autoplayVideos: false, zoomable: false, preload: true });
+          var finalOpts = Object.assign({}, (userOpts || {}), { selector: selector });
+          window.__glightboxInstance = window.GLightbox(finalOpts);
         }
       }
       function wait(){
@@ -27,7 +33,7 @@ export default function buildInitClient(opts: InitOptions): string {
       }
       function reinit(){
         if (glightbox) {
-          var anchors = document.querySelectorAll('${selector}');
+          var anchors = document.querySelectorAll(selector);
           if (anchors.length) {
             anchors.forEach(function(a){
               var img = a.querySelector('img');
@@ -48,4 +54,3 @@ export default function buildInitClient(opts: InitOptions): string {
     })();
   `;
 }
-
