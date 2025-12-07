@@ -13,7 +13,9 @@
       "default": "./dist/photosuite.js"
     },
     "./dist/image-alts.css": "./dist/image-alts.css",
-    "./dist/exif.css": "./dist/exif.css"
+    "./image-alts.css": "./dist/image-alts.css",
+    "./dist/exif.css": "./dist/exif.css",
+    "./exif.css": "./dist/exif.css"
   },
   "keywords": ["astro-integration", "withastro", "glightbox", "lightbox", "markdown", "images"],
   "dependencies": {},
