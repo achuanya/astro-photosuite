@@ -31,6 +31,7 @@ export default defineConfig({
 - `gallery`: Value for `data-gallery` when missing. Default: `markdown`.
 - `glightbox`: Enable/disable GLightbox behavior entirely. Default: `true`.
 - `imageAlts`: Enable/disable automatic bottom image descriptions (rendered via `<figcaption>`). Default: `true`.
+- `exif`: Enable/disable top overlay bar (`photosuite-exif`) injection. Default: `true`.
 - `imageBase`: Base URL for image short links. Default: undefined.
 - `imageDir`: Frontmatter key for per-article directory segment. Default: `imageDir`.
 - `fileDir`: Use the Markdown file name (without extension) as directory segment. Default: `false`.
@@ -41,6 +42,7 @@ export default defineConfig({
 - Optionally wraps images with `<figure>` and a bottom `<figcaption>` overlay when `imageAlts` is enabled.
 - Re-initializes GLightbox after Astro view transitions. GLightbox assets (CSS/JS) are no longer auto-loaded by this plugin — include them yourself in your layout.
 - Ships small CSS for bottom image descriptions that is auto-injected at runtime.
+- Ships independent CSS for top EXIF overlay that is auto-injected when `exif` is enabled.
 
 ### Examples
 
@@ -48,7 +50,7 @@ Disable glightbox but keep descriptions:
 
 ```
 export default defineConfig({
-  integrations: [photosuite({ glightbox: false, imageAlts: true })]
+  integrations: [photosuite({ glightbox: false, imageAlts: true, exif: true })]
 })
 ```
 
@@ -56,7 +58,7 @@ Disable descriptions but keep glightbox:
 
 ```
 export default defineConfig({
-  integrations: [photosuite({ glightbox: true, imageAlts: false })]
+  integrations: [photosuite({ glightbox: true, imageAlts: false, exif: true })]
 })
 ```
 Image short links:

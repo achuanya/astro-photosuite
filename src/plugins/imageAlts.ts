@@ -22,7 +22,6 @@ const imageAlts: Plugin<[ImageAltsOptions?], Root> = (opts = {}) => {
     };
     const wrapWithFigure = (node: Element, parent: Element, index: number) => {
       const altText = getImgAlt(node);
-      if (!altText) return;
       const figcaption: Element = {
         type: "element",
         tagName: "figcaption",
@@ -33,7 +32,7 @@ const imageAlts: Plugin<[ImageAltsOptions?], Root> = (opts = {}) => {
         type: "element",
         tagName: "figure",
         properties: { className: ["photosuite-figure"] },
-        children: [node, figcaption]
+        children: altText ? [node, figcaption] : [node]
       };
       (parent.children as any[])[index] = figure;
     };
@@ -56,4 +55,3 @@ const imageAlts: Plugin<[ImageAltsOptions?], Root> = (opts = {}) => {
 };
 
 export default imageAlts;
-

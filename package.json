@@ -12,7 +12,8 @@
       "types": "./dist/photosuite.d.ts",
       "default": "./dist/photosuite.js"
     },
-    "./dist/image-alts.css": "./dist/image-alts.css"
+    "./dist/image-alts.css": "./dist/image-alts.css",
+    "./dist/exif.css": "./dist/exif.css"
   },
   "keywords": ["astro-integration", "withastro", "glightbox", "lightbox", "markdown", "images"],
   "dependencies": {},
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "astro": "^5.0.0",
+    "chokidar": "^3.6.0",
     "sass": "^1.77.0",
     "tsup": "^8.0.0",
     "typescript": "^5.6.0",
@@ -28,6 +30,7 @@
     "unified": "^11.0.4"
   },
   "scripts": {
-    "build": "sass src/styles/image-alts.scss dist/image-alts.css --no-source-map --style=compressed && tsup src/photosuite.ts --format esm --dts --out-dir dist --minify && node scripts/postcompress.mjs"
+    "build": "sass src/styles/image-alts.scss dist/image-alts.css --no-source-map --style=compressed && sass src/styles/exif.scss dist/exif.css --no-source-map --style=compressed && tsup src/photosuite.ts --format esm --dts --out-dir dist --minify && node scripts/postcompress.mjs",
+    "watch": "node scripts/watch.mjs"
   }
 }

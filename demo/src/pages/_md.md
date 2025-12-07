@@ -1,1 +1,1 @@
-![Canon EOS R7 RF100-400mm F5.6-8 IS USM 400.0mm · ƒ/8.0 · 1/200s · ISO 800 © Michael Kleinsasser](https://cos.lhasa.icu/dist/images/2025-09-18-integrating-lightgallery/moon-8579189.jpg)
+![Canon EOS R7 RF100-400mm F5.6-8 IS USM 400.0mm · ƒ/8.0 · 1/200s · ISO 800 © Michael Kleinsasser](https://lhasa-1253887673.cos.ap-shanghai.myqcloud.com/dist/images/2025-12-02-nikon-z30-kaixiang-xiaoji/20251202011620_822_266.jpg)

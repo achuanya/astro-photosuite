@@ -3,6 +3,7 @@ export interface PhotosuiteOptions {
   gallery?: string;
   glightbox?: boolean;
   imageAlts?: boolean;
+  exif?: boolean;
   imageBase?: string;
   imageDir?: string;
   fileDir?: boolean;

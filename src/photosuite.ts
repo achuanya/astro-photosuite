@@ -3,6 +3,7 @@ import glightboxPlugin from "./plugins/glightbox";
 import imageAltsPlugin from "./plugins/imageAlts";
 import imageUrlPlugin from "./plugins/imageUrl";
 import buildInitClient from "./init";
+import buildExifClient from "./plugins/exif";
 import type { PhotosuiteOptions } from "./types";
 
 export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroIntegration {
@@ -10,6 +11,7 @@ export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroI
   const gallery = options.gallery ?? "markdown";
   const glightbox = options.glightbox ?? true;
   const imageAlts = options.imageAlts ?? true;
+  const exif = options.exif ?? true;
   const imageBase = options.imageBase;
   const imageDir = options.imageDir ?? "imageDir";
   const fileDir = options.fileDir ?? false;
@@ -31,6 +33,10 @@ export default function astroPhotosuite(options: PhotosuiteOptions = {}): AstroI
           }
         });
         injectScript("head-inline", initClient);
+        if (exif) {
+          injectScript("head-inline", buildExifClient());
+          injectScript("page-ssr", 'import "astro-photosuite/dist/exif.css";');
+        }
         if (imageAlts) injectScript("page-ssr", 'import "astro-photosuite/dist/image-alts.css";');
       }
     }
